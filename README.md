@@ -25,7 +25,7 @@ get_target_property(PLUGIN_PACKAGE_PATH MyPlugin SMTG_PLUGIN_PACKAGE_PATH)
 
 vst3_cpack_configure(
     PLUGIN_PACKAGE_DIRECTORY "${PLUGIN_PACKAGE_PATH}"
-    PLUGIN_PRESETs_DIRECTORY "/path/to/MyPlugin/presets # Optional
+    PLUGIN_PRESETS_DIRECTORY "/path/to/MyPlugin/presets # Optional
 )
 include(CPack)
 ```
@@ -39,7 +39,7 @@ set(CPACK_PACKAGE_VENDOR "My Company)
 set(CPACK_RESOURCE_FILE_LICENSE ${PROJECT_SOURCE_DIR}/LICENSE)
 vst3_cpack_configure(
     PLUGIN_PACKAGE_DIRECTORY "/path/to/build/Release/MyPlugin.vst3"
-    PLUGIN_PRESETs_DIRECTORY "/path/to/MyPlugin/presets # Optional
+    PLUGIN_PRESETS_DIRECTORY "/path/to/MyPlugin/presets # Optional
 )
 include(CPack)
 ```
