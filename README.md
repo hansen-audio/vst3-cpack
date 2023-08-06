@@ -57,8 +57,10 @@ Other CPack generators might work as well.
 Execute CPack inside the CMake binary directory of your VST3 project. 
 
 ```console
-cpack -G INNOSETUP .
+cpack -C Release -G INNOSETUP .
 ```
+
+> You can also use ```-C Debug``` to pickup the debug build of your VST3 plugin for testing purpose.
 
 ## Prepare Windows for VST3 CPack
 
