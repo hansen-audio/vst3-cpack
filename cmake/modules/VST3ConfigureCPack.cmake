@@ -73,8 +73,12 @@ macro(vst3_cpack_configure)
         # Points to '/Applications' by default
         set(CPACK_PACKAGING_INSTALL_PREFIX "/")
     else()
+        # Create toplevel dir inside the archive. 
+        # TODO: Also for WIN32 and APPLE when using ZIP generator?
+        # https://cmake.org/cmake/help/latest/variable/CPACK_COMPONENT_INCLUDE_TOPLEVEL_DIRECTORY.html
+        set(CPACK_COMPONENT_INCLUDE_TOPLEVEL_DIRECTORY ON)
         set(VST3_CPACK_PLUGIN_PACKAGE_DESTINATION ".")
-        set(VST3_CPACK_PLUGIN_PRESETS_DESTINATION "VST3 Presets/${CPACK_PACKAGE_VENDOR}/${PROJECT_NAME}")
+        set(VST3_CPACK_PLUGIN_PRESETS_DESTINATION "./VST3 Presets/${CPACK_PACKAGE_VENDOR}/${PROJECT_NAME}")
     endif()
 
     vst3_cpack_dump_vars()
@@ -87,7 +91,6 @@ macro(vst3_cpack_configure_directories)
         DIRECTORY   "${VST3_CPACK_CONFIGURE_PLUGIN_PACKAGE_PATH}"
         DESTINATION "${VST3_CPACK_PLUGIN_PACKAGE_DESTINATION}"
         COMPONENT   vst3plugin
-        # CONFIGURATIONS Release
     )
 
     # presets
@@ -95,7 +98,6 @@ macro(vst3_cpack_configure_directories)
         DIRECTORY   "${VST3_CPACK_CONFIGURE_PLUGIN_PRESETS_PATH}"
         DESTINATION "${VST3_CPACK_PLUGIN_PRESETS_DESTINATION}"
         COMPONENT   vst3presets
-        # CONFIGURATIONS Release
     )
 
     # Display both vst3plugin and vst3presets (optional) components
