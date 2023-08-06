@@ -36,8 +36,8 @@ macro(vst3_cpack_configure)
     )
 
     if(VST3_CPACK_CONFIGURE_UNPARSED_ARGUMENTS)
-		message(WARNING "[VCP] Unparsed arguments: ${VST3_CPACK_CONFIGURE_UNPARSED_ARGUMENTS}")
-	endif()
+        message(WARNING "[VCP] Unparsed arguments: ${VST3_CPACK_CONFIGURE_UNPARSED_ARGUMENTS}")
+    endif()
 
     # The last component of each directory name is appended to the destination directory 
     # but a trailing slash may be used to avoid this because it leaves the last component empty.
