@@ -24,8 +24,8 @@ Insert the following lines to the end of the root ```CMakeLists.txt``` of your V
 get_target_property(PLUGIN_PACKAGE_PATH MyPlugin SMTG_PLUGIN_PACKAGE_PATH)
 
 vst3_cpack_configure(
-    PLUGIN_PACKAGE_DIRECTORY "${PLUGIN_PACKAGE_PATH}"
-    PLUGIN_PRESETS_DIRECTORY "/path/to/MyPlugin/presets # Optional
+    PLUGIN_PACKAGE_PATH "${PLUGIN_PACKAGE_PATH}"
+    PLUGIN_PRESETS_PATH "/path/to/MyPlugin/presets # Optional
 )
 include(CPack)
 ```
@@ -38,8 +38,8 @@ You can still use CPack as usual and set CPack variables.
 set(CPACK_PACKAGE_VENDOR "My Company)
 set(CPACK_RESOURCE_FILE_LICENSE ${PROJECT_SOURCE_DIR}/LICENSE)
 vst3_cpack_configure(
-    PLUGIN_PACKAGE_DIRECTORY "/path/to/build/Release/MyPlugin.vst3"
-    PLUGIN_PRESETS_DIRECTORY "/path/to/MyPlugin/presets # Optional
+    PLUGIN_PACKAGE_PATH "/path/to/build/Release/MyPlugin.vst3"
+    PLUGIN_PRESETS_PATH "/path/to/MyPlugin/presets # Optional
 )
 include(CPack)
 ```

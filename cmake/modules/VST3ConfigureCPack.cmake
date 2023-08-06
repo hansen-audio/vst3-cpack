@@ -8,29 +8,29 @@ Configure CPack to be used in a VST3 project.
 
   .. code-block:: cmake
 
-    vst3_cpack_configure(PLUGIN_PACKAGE_DIRECTORY PLUGIN_PRESETS_DIRECTORY)
+    vst3_cpack_configure(PLUGIN_PACKAGE_PATH PLUGIN_PRESETS_PATH)
 
   ::
 
-    PLUGIN_PACKAGE_DIRECTORY - The directory path to the VST3 package.
-    PLUGIN_PRESETS_DIRECTORY - The directory path to the VST3 presets.
+    PLUGIN_PACKAGE_PATH - The directory path to the VST3 package.
+    PLUGIN_PRESETS_PATH - The directory path to the VST3 presets.
 
   Example:
 
   .. code-block:: cmake
 
     vst3_cpack_configure(
-        PLUGIN_PACKAGE_DIRECTORY "/path/to/build/Release/MyPlugin.vst3"
-        PLUGIN_PRESETS_DIRECTORY "/path/to/MyPlugin/presets"
+        PLUGIN_PACKAGE_PATH "/path/to/build/Release/MyPlugin.vst3"
+        PLUGIN_PRESETS_PATH "/path/to/MyPlugin/presets"
     )
 
 #]=======================================================================]
 
 macro(vst3_cpack_configure)
     cmake_parse_arguments(
-        VST3_CPACK_CONFIGURE                # Prefix of output variables e.g. VST3_CPACK_CONFIGURE_PLUGIN_PACKAGE_DIRECTORY
+        VST3_CPACK_CONFIGURE                # Prefix of output variables e.g. VST3_CPACK_CONFIGURE_PLUGIN_PACKAGE_PATH
         ""                                  # List of names for boolean arguments
-        "PLUGIN_PACKAGE_DIRECTORY;PLUGIN_PRESETS_DIRECTORY"   # List of names for mono-valued arguments
+        "PLUGIN_PACKAGE_PATH;PLUGIN_PRESETS_PATH"   # List of names for mono-valued arguments
         ""                                  # List of names for multi-valued arguments resp. lists
         ${ARGN}                             # Arguments of the function to parse
     )
@@ -42,8 +42,8 @@ macro(vst3_cpack_configure)
     # The last component of each directory name is appended to the destination directory 
     # but a trailing slash may be used to avoid this because it leaves the last component empty.
     # https://cmake.org/cmake/help/v3.22/command/install.html#installing-directories
-    if(DEFINED VST3_CPACK_CONFIGURE_PLUGIN_PRESETS_DIRECTORY)
-        string(APPEND VST3_CPACK_CONFIGURE_PLUGIN_PRESETS_DIRECTORY "/")
+    if(DEFINED VST3_CPACK_CONFIGURE_PLUGIN_PRESETS_PATH)
+        string(APPEND VST3_CPACK_CONFIGURE_PLUGIN_PRESETS_PATH "/")
     endif()
 
     # https://cmake.org/cmake/help/latest/module/CPack.html#variable:CPACK_PROJECT_CONFIG_FILE
@@ -84,7 +84,7 @@ endmacro()
 macro(vst3_cpack_configure_directories)
     # plugin
     install(
-        DIRECTORY   "${VST3_CPACK_CONFIGURE_PLUGIN_PACKAGE_DIRECTORY}"
+        DIRECTORY   "${VST3_CPACK_CONFIGURE_PLUGIN_PACKAGE_PATH}"
         DESTINATION "${VST3_CPACK_PLUGIN_PACKAGE_DESTINATION}"
         COMPONENT   vst3plugin
         # CONFIGURATIONS Release
@@ -92,7 +92,7 @@ macro(vst3_cpack_configure_directories)
 
     # presets
     install(
-        DIRECTORY   "${VST3_CPACK_CONFIGURE_PLUGIN_PRESETS_DIRECTORY}"
+        DIRECTORY   "${VST3_CPACK_CONFIGURE_PLUGIN_PRESETS_PATH}"
         DESTINATION "${VST3_CPACK_PLUGIN_PRESETS_DESTINATION}"
         COMPONENT   vst3presets
         # CONFIGURATIONS Release
@@ -100,15 +100,15 @@ macro(vst3_cpack_configure_directories)
 
     # Display both vst3plugin and vst3presets (optional) components
     set(CPACK_COMPONENTS_ALL vst3plugin)
-    if(DEFINED VST3_CPACK_CONFIGURE_PLUGIN_PRESETS_DIRECTORY)
+    if(DEFINED VST3_CPACK_CONFIGURE_PLUGIN_PRESETS_PATH)
         list(APPEND CPACK_COMPONENTS_ALL vst3presets)
     endif()
 endmacro()
 
 macro (vst3_cpack_dump_vars)
     message(STATUS "[VCP] PLUGIN_NAME                                    : ${PROJECT_NAME}")
-    message(STATUS "[VCP] VST3_CPACK_CONFIGURE_PLUGIN_PACKAGE_DIRECTORY  : ${VST3_CPACK_CONFIGURE_PLUGIN_PACKAGE_DIRECTORY}")
-    message(STATUS "[VCP] VST3_CPACK_CONFIGURE_PLUGIN_PRESETS_DIRECTORY  : ${VST3_CPACK_CONFIGURE_PLUGIN_PRESETS_DIRECTORY}")
+    message(STATUS "[VCP] VST3_CPACK_CONFIGURE_PLUGIN_PACKAGE_PATH  : ${VST3_CPACK_CONFIGURE_PLUGIN_PACKAGE_PATH}")
+    message(STATUS "[VCP] VST3_CPACK_CONFIGURE_PLUGIN_PRESETS_PATH  : ${VST3_CPACK_CONFIGURE_PLUGIN_PRESETS_PATH}")
     message(STATUS "[VCP] CPACK_PROJECT_CONFIG_FILE                      : ${CPACK_PROJECT_CONFIG_FILE}")
     message(STATUS "[VCP] VST3_CPACK_PLUGIN_PACKAGE_DESTINATION          : ${VST3_CPACK_PLUGIN_PACKAGE_DESTINATION}")
     message(STATUS "[VCP] VST3_CPACK_PLUGIN_PRESETS_DESTINATION          : ${VST3_CPACK_PLUGIN_PRESETS_DESTINATION}")
