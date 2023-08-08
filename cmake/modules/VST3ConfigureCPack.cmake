@@ -64,8 +64,8 @@ macro(vst3_cpack_configure)
         set(VST3_CPACK_PLUGIN_PACKAGE_DESTINATION "VST3")
         set(VST3_CPACK_PLUGIN_PRESETS_DESTINATION "VST3 Presets/${CPACK_PACKAGE_VENDOR}/${PROJECT_NAME}")
         
-        # For the uninstaller, e.g.: C:\Program Files\Company MyPlugin\
-        set(CPACK_PACKAGE_INSTALL_DIRECTORY "${CPACK_PACKAGE_VENDOR} ${PROJECT_NAME}")
+        # For the uninstaller, e.g.: C:\Program Files\Company\${PROJECT_NAME}
+        set(CPACK_PACKAGE_INSTALL_DIRECTORY "${PROJECT_NAME}")
     elseif(APPLE)
         set(VST3_CPACK_PLUGIN_PACKAGE_DESTINATION "Library/Audio/Plug-ins/VST3")
         set(VST3_CPACK_PLUGIN_PRESETS_DESTINATION "Library/Audio/Presets/${CPACK_PACKAGE_VENDOR}/${PROJECT_NAME}")
