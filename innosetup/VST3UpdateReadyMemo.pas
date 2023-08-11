@@ -20,7 +20,7 @@ begin
   
   if WizardIsComponentSelected('vst3presets')
   then begin
-    cTemp := cTemp + '{#VST3_PRESETS_STR}{#WILL_BE_INSTALLED_TO_STR}' + NewLine;
+    cTemp := cTemp + '{#VST3_PRESETS_STR}' + '{#WILL_BE_INSTALLED_TO_STR}' + NewLine;
     cTemp := cTemp + Space + ExpandConstant('{commonappdata}\{#VST3_PRESETS_STR}') + NewLine + NewLine;
   end;
 
