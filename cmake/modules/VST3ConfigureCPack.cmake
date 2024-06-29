@@ -92,6 +92,7 @@ macro(vst3_cpack_configure_directories)
         DIRECTORY   "${VST3_CPACK_CONFIGURE_PLUGIN_PACKAGE_PATH}"
         DESTINATION "${VST3_CPACK_PLUGIN_PACKAGE_DESTINATION}"
         COMPONENT   vst3plugin
+        USE_SOURCE_PERMISSIONS
     )
 
     # presets
