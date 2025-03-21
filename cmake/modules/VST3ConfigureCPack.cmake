@@ -73,8 +73,10 @@ macro(vst3_cpack_configure)
         # Points to '/Applications' by default
         set(CPACK_PACKAGING_INSTALL_PREFIX "/")
     else()
+        # Forcefully override CMAKE_INSTALL_PREFIX. Don't know yet if this can make trouble.
+        set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/vst3_cpack_tmp" CACHE STRING "vst3pack folder for Linux" FORCE)
         set(VST3_CPACK_PLUGIN_PACKAGE_DESTINATION ".")
-        set(VST3_CPACK_PLUGIN_PRESETS_DESTINATION "./presets/${CPACK_PACKAGE_VENDOR}/${PROJECT_NAME}")
+        set(VST3_CPACK_PLUGIN_PRESETS_DESTINATION "presets/${CPACK_PACKAGE_VENDOR}/${PROJECT_NAME}")
 
         # Create toplevel dir inside the archive. 
         # TODO: Also for WIN32 and APPLE when using ZIP generator?
